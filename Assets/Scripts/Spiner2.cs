@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spiner : MonoBehaviour
+public class Spiner2 : MonoBehaviour
 {
     [SerializeField]
     private double _speed = 0;
@@ -40,7 +40,7 @@ public class Spiner : MonoBehaviour
     {
         _direction = dir.normalized;
     }
-    
+
     /// <summary>
     /// ï«Ç…ìñÇΩÇ¡ÇΩèÍçáÇ…åƒÇŒÇÍÇÈ
     /// </summary>
@@ -100,7 +100,7 @@ public class Spiner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnTriggerEnter2D : Spiner" + gameObject.name + "->" + collision.gameObject.name);
+        Debug.Log("OnTriggerEnter2D : " + gameObject.name + "->" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Spiner"))
         {
             Debug.Log("Hit");
