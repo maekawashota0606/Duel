@@ -6,23 +6,38 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private Spiner _mySpiner = null;
+
     private Vector3 origin = Vector3.zero;
     private Vector3 end = Vector3.zero;
 
-
-    private void Update()
+    public void MyUpdate()
     {
+        
+    }
+
+    public Spiner GetSpiner()
+    {
+        return _mySpiner;
+    }
+
+    public bool Flick()
+    {
+        bool isCompleted = false;
+
         // TODO:コントローラー対応
         if (InputProvider.Instance.GetFire1Down())
             origin = Input.mousePosition;
         else if (InputProvider.Instance.GetFire1Up())
         {
             end = Input.mousePosition;
-            CalAngleZ(origin, end);
+            //CalAngleZ(origin, end);
             _mySpiner.ChangeDirection(origin - end);
-        }
-    }
 
+            isCompleted = true;
+        }
+
+        return isCompleted;
+    }
 
     /// <summary>
     /// マウスをフリックした際の角度を求める(いる？)
@@ -42,5 +57,4 @@ public class Player : MonoBehaviour
 
         return z;
     }
-
 }
