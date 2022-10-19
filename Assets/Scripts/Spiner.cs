@@ -15,6 +15,15 @@ public class Spiner : MonoBehaviour
     [SerializeField]
     public  float length = 120;
 
+    /// <summary>
+    /// 移動方向を指定
+    /// </summary>
+    /// <param name="dir"></param>
+    public void SetDirection(Vector3 dir)
+    {
+        _direction = dir.normalized;
+    }
+
 
     public void MyUpdate()
     {
@@ -23,17 +32,8 @@ public class Spiner : MonoBehaviour
             // 最終的に移動前に壁判定したい
             Move();
             //
-            if(MyPhysics.Instance.IsHitSpinerAndSpiner)
+            //if(MyPhysics.Instance.IsHitSpinerAndSpiner)
         }
-    }
-
-    /// <summary>
-    /// 移動方向を指定
-    /// </summary>
-    /// <param name="dir"></param>
-    public void SetDirection(Vector3 dir)
-    {
-        _direction = dir.normalized;
     }
 
     /// <summary>

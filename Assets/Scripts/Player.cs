@@ -5,19 +5,49 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
+    private int _charaNum = 0;
     private Spiner _mySpiner = null;
-
     private Vector3 origin = Vector3.zero;
     private Vector3 end = Vector3.zero;
+    private bool _isReady = false;
 
-    public void MyUpdate()
+
+    #region getter, setter
+    public int GetCharaNum()
     {
-        
+        return _charaNum;
+    }
+
+    public void SetCharaNum(int num)
+    {
+        _charaNum = num;
     }
 
     public Spiner GetSpiner()
     {
         return _mySpiner;
+    }
+
+    public void SetSpiner(Spiner spiner)
+    {
+        _mySpiner = spiner;
+    }
+
+    public bool GetIsReady()
+    {
+        return _isReady;
+    }
+
+    public void SetIsReady(bool isReady)
+    {
+        _isReady = isReady;
+    }
+    #endregion
+
+
+    public void MyUpdate()
+    {
+
     }
 
     public bool Flick()
