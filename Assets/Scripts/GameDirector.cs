@@ -37,6 +37,14 @@ public class GameDirector : MonoBehaviour
         AddPlayersToList();
         GenerateSpiners();
         AddSpinersToList();
+
+        // ‰ŠúˆÊ’u‚ğŒˆ’è
+        foreach (Player player in  _players)
+        {
+            player.GetSpiner().SetDefaultPosition(player.GetPlayerNum());
+        }
+
+
         _onUpdate = OnWaiting;
     }
 
@@ -105,6 +113,9 @@ public class GameDirector : MonoBehaviour
         {
             spiner.MyUpdate();
         }
+
+        // TODO:‚¢‚¢Š´‚¶‚É”½Ë‚³‚¹‚½‚¢
+        Collisions.SpinersCollision(_spiners);
     }
 
     private void OnEnded()

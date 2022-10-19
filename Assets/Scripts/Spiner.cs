@@ -24,6 +24,22 @@ public class Spiner : MonoBehaviour
         _direction = dir.normalized;
     }
 
+    public void SetDefaultPosition(int playerNum)
+    {
+        Vector3 pos = Vector3.zero;
+        switch (playerNum)
+        {
+            case 0:
+                pos.x = -200;
+                break;
+            case 1:
+                pos.x = 200;
+                break;
+            default:break;
+        }
+        transform.position = pos;
+    }
+
 
     public void MyUpdate()
     {

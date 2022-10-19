@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private int _charaNum = 0;
+    [SerializeField]
+    private int _playerNum = 0;
     private Spiner _mySpiner = null;
     private Vector3 origin = Vector3.zero;
     private Vector3 end = Vector3.zero;
@@ -21,6 +23,16 @@ public class Player : MonoBehaviour
     public void SetCharaNum(int num)
     {
         _charaNum = num;
+    }
+
+    public int GetPlayerNum()
+    {
+        return _playerNum;
+    }
+
+    public void SetPlayerNum(int num)
+    {
+        _playerNum = num;
     }
 
     public Spiner GetSpiner()

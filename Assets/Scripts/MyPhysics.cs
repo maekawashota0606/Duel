@@ -1,24 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MyPhysics : SingletonMonoBehaviour<MyPhysics>
 {
-    [SerializeField]
-    public List<Wall> _walls = new List<Wall>();
-
-    
-    //private void Update()
-    //{
-    //    IsHitSpinerAndSpiner();
-    //}
-
-    //public void IsHitSpinerAndSpiner()
-    //{
-    //    IsHitCircleAndCircle(_spiner_1.gameObject.transform.position, _spiner_2.gameObject.transform.position, _spiner_1.length, _spiner_2.length);
-    //}
-
-
     public static bool IsHitCircleAndCircle(Vector3 v1, Vector3 v2, float r1, float r2)
     {
         float a = v1.x - v2.x;
