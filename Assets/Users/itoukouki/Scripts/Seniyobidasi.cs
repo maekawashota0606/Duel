@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Seniyobidasi : MonoBehaviour
 {
     GameObject ManageObject;
     Sceneseni fadeManager;
     public GameObject butoon;
+    public Text karitext;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +30,6 @@ public class Seniyobidasi : MonoBehaviour
     {
         fadeManager.fadeOutStart(0, 0, 0, 0, "SampleScene");
         Destroy(butoon);
+        Destroy(karitext);
     }
 }
