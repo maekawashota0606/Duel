@@ -1,90 +1,77 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-/*using UnityEngine.AddressableAssets;
-using Cysharp.Threading.Tasks;
-using UniRx;*/
 
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
-{/*
-    public enum SoundType
+{
+    [System.Serializable]
+    public class SoundData
     {
-        SE,
-        BGM,
+        public string name;
+        public AudioClip audioClip;
+        public float playedTime;    //前回再生した時間
     }
 
-    private AudioSource SESource;
-    private AudioSource BGMSource;
-    public bool CanPlayable;
-    private Dictionary<SoundDef, AudioClip> SEClips = new Dictionary<SoundDef, AudioClip>();
-    private Dictionary<MusicDef, AudioClip> BGMClips = new Dictionary<MusicDef, AudioClip>();
+    [SerializeField]
+    private SoundData[] soundDatas;
 
-    private MusicDef? _lastPlayedBGM = null;
+    //AudioSource（スピーカー）を同時に鳴らしたい音の数だけ用意
+    private AudioSource[] audioSourceList = new AudioSource[20];
 
-    //BGM再生
-    public void PlayBgm(MusicDef target, float volume = 1f, bool isLoop = false, float fadeTime = 0f)
+    //別名(name)をキーとした管理用Dictionary
+    private Dictionary<string, SoundData> soundDictionary = new Dictionary<string, SoundData>();
+
+    //一度再生してから、次再生出来るまでの間隔(秒)
+    [SerializeField]
+    private float playableDistance = 0.2f;
+
+    private void Awake()
     {
-        BGMSource.clip = BGMClips[target];
-        BGMSource.loop = isLoop;
-        BGMSource.volume = volume;
-        BGMSource.Play();
-        _lastPlayedBGM = target;
-    }
-
-    public void StopBgm()
-    {
-        BGMSource.Stop();
-        BGMSource.clip = null;
-    }
-
-    //SE再生
-    public void PlaySe(SoundDef target, float volume = 1f)
-    {
-        SESource.PlayOneShot(SEClips[target], volume);
-    }
-
-    public void StopSe()
-    {
-        SESource.Stop();
-        SESource.clip = null;
-    }
-
-    // Start is called before the first frame update
-    async void Awake()
-    {
-        SESource = gameObject.AddComponent<AudioSource>();
-        SESource.playOnAwake = false;
-        BGMSource = gameObject.AddComponent<AudioSource>();
-        BGMSource.playOnAwake = false;
-        Array soundDef = Enum.GetValues(typeof(SoundDef));
-
-        for (int i = 0; i < soundDef.Length; i++)
+        //auidioSourceList配列の数だけAudioSourceを自分自身に生成して配列に格納
+        for (var i = 0; i < audioSourceList.Length; ++i)
         {
-            object Def = soundDef.GetValue(i);
-            AudioClip Clip = await Addressables.LoadAssetAsync<AudioClip>("SE/" + Def.ToString()).NotNullTask();
-            SEClips.Add((SoundDef)i, Clip);
+            audioSourceList[i] = gameObject.AddComponent<AudioSource>();
         }
-        Array musicDef = Enum.GetValues(typeof(MusicDef));
-        for (int i = 0; i < musicDef.Length; i++)
+
+        //soundDictionaryにセット
+        foreach (var soundData in soundDatas)
         {
-            object Def = musicDef.GetValue(i);
-            AudioClip Clip = await Addressables.LoadAssetAsync<AudioClip>("BGM/" + Def.ToString()).NotNullTask();
-            BGMClips.Add((MusicDef)i, Clip);
+            soundDictionary.Add(soundData.name, soundData);
         }
-        CanPlayable = true;
     }
 
-    private void Start()
+    //未使用のAudioSourceの取得 全て使用中の場合はnullを返却
+    private AudioSource GetUnusedAudioSource()
     {
-        // TODO: 暫定
-        this.ObserveEveryValueChanged(x => x.BGMSource.isPlaying)
-            .Where(isPlaying => !isPlaying)
-            .Where(_ => _lastPlayedBGM == MusicDef.First)
-            .Where(_ => BGMSource.clip != null)
-            .Subscribe(_ =>
-            {
-                PlayBgm(MusicDef.Loop, isLoop: true);
-            })
-            .AddTo(this);
-    }*/
+        for (var i = 0; i < audioSourceList.Length; ++i)
+        {
+            if (audioSourceList[i].isPlaying == false) return audioSourceList[i];
+        }
+
+        return null; //未使用のAudioSourceは見つかりませんでした
+    }
+
+    //指定されたAudioClipを未使用のAudioSourceで再生
+    public void Play(AudioClip clip)
+    {
+        var audioSource = GetUnusedAudioSource();
+        if (audioSource == null) return; //再生できませんでした
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    //指定された別名で登録されたAudioClipを再生
+    public void Play(string name)
+    {
+        if (soundDictionary.TryGetValue(name, out var soundData)) //管理用Dictionary から、別名で探索
+        {
+            if (Time.realtimeSinceStartup - soundData.playedTime < playableDistance) return;    //まだ再生するには早い
+            soundData.playedTime = Time.realtimeSinceStartup;//次回用に今回の再生時間の保持
+            Play(soundData.audioClip); //見つかったら、再生
+        }
+        else
+        {
+            Debug.LogWarning($"その別名は登録されていません:{name}");
+        }
+    }
 }
