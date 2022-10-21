@@ -77,10 +77,6 @@ public class Spiner : MonoBehaviour
         // –@ü‚ğQÆ‚µ‚Ä”½Ë
         ChangeDirection(Vector3.Reflect(_direction, normal));
 
-<<<<<<< HEAD
-        // Œ¸‘¬H
-        _speed -= _speed * 0.1;//’Ç‰Á
-=======
         // Œ¸‘¬
     }
 
@@ -93,7 +89,6 @@ public class Spiner : MonoBehaviour
         ChangeDirection(_direction * -1);
 
         // Œ¸‘¬
->>>>>>> origin/develop/maekawa
     }
 
     public void ChangeDirection(Vector3 dir)

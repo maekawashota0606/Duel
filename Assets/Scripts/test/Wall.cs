@@ -12,18 +12,7 @@ public class Wall : MonoBehaviour
         if (collision.gameObject.CompareTag("Spiner"))
         {
             //Debug.Log("Hit");
-<<<<<<< HEAD
-            if(collision.gameObject.name == "Spiner")
-            {
-                collision.gameObject.GetComponent<Spiner>().Reflect(normal);
-            }
-            else
-            {
-                collision.gameObject.GetComponent<Spiner2>().Reflect(normal);
-            }
-=======
             collision.gameObject.GetComponent<Spiner>().ReflectWall(normal);
->>>>>>> origin/develop/maekawa
         }
     }
 }
