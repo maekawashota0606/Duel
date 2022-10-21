@@ -14,6 +14,12 @@ public class Spiner : MonoBehaviour
     private float _stopThreshold = 0;
     [SerializeField]
     public  float length = 120;
+    [SerializeField]
+    private SpinersAttack _spinersAttack = null;
+    [SerializeField]
+    private Animator _animator = null;
+    private int _HP = 100;
+    private int _power = 35;
 
     /// <summary>
     /// ˆÚ“®•ûŒü‚ðŽw’è
@@ -22,6 +28,11 @@ public class Spiner : MonoBehaviour
     public void SetDirection(Vector3 dir)
     {
         _direction = dir.normalized;
+    }
+
+    public Vector3 GetDirection()
+    {
+        return _direction.normalized;
     }
 
     public void SetDefaultPosition(int playerNum)
@@ -40,7 +51,6 @@ public class Spiner : MonoBehaviour
         transform.position = pos;
     }
 
-
     public void MyUpdate()
     {
         if (CheckSpeed())
@@ -50,6 +60,28 @@ public class Spiner : MonoBehaviour
             //
             //if(MyPhysics.Instance.IsHitSpinerAndSpiner)
         }
+    }
+
+
+    public void AddDamage(int damage)
+    {
+
+    }
+
+    public void Attack()
+    {
+        if (!_animator.GetBool("IsAttacking"))
+        {
+            //Debug.Log("attack");
+            _animator.SetTrigger("Attack");
+            _animator.SetBool("IsAttacking", true);
+            StartCoroutine(_spinersAttack.Attack(this, OnFinishedAttack));
+        }
+    }
+
+    private void OnFinishedAttack()
+    {
+        _animator.SetBool("IsAttacking", false);
     }
 
     /// <summary>

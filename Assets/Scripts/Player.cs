@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
     public void MyUpdate()
     {
-
+        InputAttack();
     }
 
     public bool Flick()
@@ -79,6 +79,14 @@ public class Player : MonoBehaviour
         }
 
         return isCompleted;
+    }
+
+    private void InputAttack()
+    {
+        if(InputProvider.Instance.GetFire2Down())
+        {
+            _mySpiner.Attack();
+        }
     }
 
     /// <summary>

@@ -11,7 +11,7 @@ public class MyPhysics : SingletonMonoBehaviour<MyPhysics>
 
         if (d >= c)
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             return true;
         }
         else
