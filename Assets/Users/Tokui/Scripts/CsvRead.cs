@@ -10,10 +10,10 @@ public class CsvRead : MonoBehaviour
 
     Encoding encoding;
 
-    public void ManagedStart()
+    public void Start()
     {
         this.encoding = Encoding.GetEncoding("utf-8");
-        csvFile = Resources.Load("Data/WeaponData") as TextAsset; // Resouces下のCSV読み込み
+        csvFile = Resources.Load("Data/CharaData") as TextAsset; // Resouces下のCSV読み込み
         StringReader reader = new StringReader(csvFile.text);
 
         // , で分割しつつ一行ずつ読み込み
@@ -27,15 +27,14 @@ public class CsvRead : MonoBehaviour
 
         foreach (string[] Row in csvDatas)
         {
-            WeaponManager.weaponDatas.Add(new WeaponDatas
+            CharaManager.weaponDatas.Add(new CharaDatas
             {
-                WeaponName = Row[0],
+                CharaName = Row[0],
                 PrefabsName = Row[1],
-                BulletSpeed = float.Parse(Row[2]),
-                GaugeMax = float.Parse(Row[3]),
-                GaugeRecovery = float.Parse(Row[4]),
-                Weaponinfo = Row[5],
-                ShotType = (ShotType) int.Parse(Row[6])
+                AtackCount = float.Parse(Row[2]),
+                AvoidanceCount = float.Parse(Row[3]),
+                Power = float.Parse(Row[4]),
+                Charainfo = Row[5],
             });
         }
 
@@ -45,7 +44,7 @@ public class CsvRead : MonoBehaviour
         // Debug.Log(csvDatas/*行*/[2]/*列*/[0]);
     }
 
-    public void ManagedUpdate()
+    public void Update()
     {
 
     }

@@ -11,33 +11,34 @@ public class CsvController : MonoBehaviour
 
     public void Start()
     {
-        foreach (WeaponDatas datas in WeaponManager.weaponDatas)
+        foreach (CharaDatas datas in CharaManager.weaponDatas)
         {
             GameObject panelObject = Instantiate(WeaponPanel, CanvasTransform);
-            var        panelProp   = panelObject.GetComponent<WeaponPanelProperty>();
+            var        panelProp   = panelObject.GetComponent<CharaPanelProperty>();
 
-            panelProp.WeaponNameText.text =
-                "武器名\n" + datas.WeaponName+
-                "\n\n　　　　弾速: " +datas.BulletSpeed +
-                "\nゲージ最大値: " + datas.GaugeMax +
-                "\nゲージ回復量: " + datas.GaugeRecovery;
+            panelProp.CharaNameText.text =
+                "武器名\n" + datas.CharaName+
+                "\n攻撃回数: " +datas.AtackCount +
+                "\n回避回数: " + datas.AvoidanceCount +
+                "\n威力: " + datas.Power +
+                "\n能力:" + datas.Charainfo;
 
-            panelProp.WeaponInfoText.text =
-                "説明\n" + datas.Weaponinfo;
+            panelProp.CharaInfoText.text =
+                "説明\n" + datas.Charainfo;
 
             // モデル生成
             var modelPrefab = Resources.Load<GameObject>(datas.PrefabsName);
 
             if (modelPrefab == null)
             {
-                Debug.LogError($"武器「{datas.WeaponName}」のプレハブが見つかりません: {datas.PrefabsName}");
+                Debug.LogError($"キャラ「{datas.CharaName}」のプレハブが見つかりません: {datas.PrefabsName}");
 
                 continue;
             }
 
             GameObject modelObject = Instantiate(modelPrefab, panelProp.ModelParentTrf);
 
-            WeaponManager.weaponModels.Add(modelObject.transform);
+            CharaManager.weaponModels.Add(modelObject.transform);
         }
     }
 

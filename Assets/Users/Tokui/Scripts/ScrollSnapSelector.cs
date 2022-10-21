@@ -40,15 +40,15 @@ public class ScrollSnapSelector : ScrollRect
 		vPerPage = 1f / (float)(hPageNum - 1);
 	}
 
-	public void ManagedStart()
+	public void Start()
 	{
 		base.Start();
 		targetPosition = GetSnapPosition();
-		hContent       = WeaponManager.weaponDatas.Count;
+		hContent       = CharaManager.weaponDatas.Count;
 		hPageMax       = hContent + 1;
 	}
 
-	public void ManagedUpdate()
+	public void Update()
 	{
 		if (!dragging && normalizedPosition != targetPosition)
 		{
