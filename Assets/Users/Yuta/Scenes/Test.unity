@@ -534,26 +534,13 @@ GameObject:
   - component: {fileID: 649899640}
   - component: {fileID: 649899639}
   - component: {fileID: 649899638}
-  - component: {fileID: 649899637}
   m_Layer: 0
-  m_Name: Player2
+  m_Name: dummy
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &649899637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649899636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61e3f696c265b94bb0a35e300babf5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &649899638
 Rigidbody2D:
   serializedVersion: 4
@@ -570,7 +557,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 613dc6363173c9941b72888878bfa261, type: 2}
+  m_Material: {fileID: 6200000, guid: 1b305f2ec8a4eaa499751be2d6746f33, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -909,7 +896,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100000
   start: 1
+  Action: 0
   Avoidance: 1
+  attackPrefab: {fileID: 8934990892549456777, guid: 93c3f7ef1729c20469ef0ee8f132e1e8, type: 3}
 --- !u!58 &1259926737
 CircleCollider2D:
   m_ObjectHideFlags: 0
