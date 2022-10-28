@@ -27,7 +27,7 @@ public class CsvRead : MonoBehaviour
 
         foreach (string[] Row in csvDatas)
         {
-            CharaManager.weaponDatas.Add(new CharaDatas
+            CharaManager.charaDatas.Add(new CharaDatas
             {
                 CharaName = Row[0],
                 PrefabsName = Row[1],

@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class CharaManager : MonoBehaviour
 {
-    public static List<CharaDatas> weaponDatas;
-    public static List<Transform>   weaponModels;
+    public static List<CharaDatas> charaDatas;
+    public static List<Transform>   charaModels;
 
-    public static CharaDatas SelectWeapon;
+    public static CharaDatas SelectChara;
 
     public void Start()
     {
-        weaponDatas  = new List<CharaDatas>();
-        weaponModels = new List<Transform>();
-        SelectWeapon = null;
+        charaDatas  = new List<CharaDatas>();
+        charaModels = new List<Transform>();
+        SelectChara = null;
     }
 
     public void Update()

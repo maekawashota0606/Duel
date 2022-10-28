@@ -44,7 +44,7 @@ public class ScrollSnapSelector : ScrollRect
 	{
 		base.Start();
 		targetPosition = GetSnapPosition();
-		hContent       = CharaManager.weaponDatas.Count;
+		hContent       = CharaManager.charaDatas.Count;
 		hPageMax       = hContent + 1;
 	}
 

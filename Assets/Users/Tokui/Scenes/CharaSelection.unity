@@ -1221,7 +1221,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1329930989
 GameObject:
@@ -1388,7 +1388,7 @@ GameObject:
   - component: {fileID: 1505209047}
   - component: {fileID: 1505209046}
   m_Layer: 5
-  m_Name: Scroll View (1)
+  m_Name: 2PScroll View
   m_TagString: ScrollView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1451,8 +1451,8 @@ MonoBehaviour:
   vPageNum: 0
   smoothness: 10
   scrollWeight: 0.1
-  hContent: 3
-  hPageMax: 4
+  hContent: 0
+  hPageMax: 1
 --- !u!114 &1505209047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,7 +1533,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654955847
 GameObject:
@@ -1579,7 +1579,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1756574128
 GameObject:
@@ -1661,7 +1661,7 @@ GameObject:
   - component: {fileID: 1770015541}
   - component: {fileID: 1770015540}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: 1PScroll View
   m_TagString: ScrollView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1724,8 +1724,8 @@ MonoBehaviour:
   vPageNum: 0
   smoothness: 10
   scrollWeight: 0.1
-  hContent: 3
-  hPageMax: 4
+  hContent: 0
+  hPageMax: 1
 --- !u!114 &1770015541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,7 +1882,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2042235753
 GameObject:

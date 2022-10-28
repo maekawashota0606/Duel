@@ -11,5 +11,5 @@ public class CharaSelectionProperty : SingletonMonoBehaviour<CharaSelectionPrope
     [SerializeField]
     private ScrollSnapSelector snapSelector2;
 
-    public static ScrollSnapSelector SnapSelector2 => Instance.snapSelector;
+    public static ScrollSnapSelector SnapSelector2 => Instance.snapSelector2;
 }

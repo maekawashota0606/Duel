@@ -11,13 +11,13 @@ public class CsvController : MonoBehaviour
 
     public void Start()
     {
-        foreach (CharaDatas datas in CharaManager.weaponDatas)
+        foreach (CharaDatas datas in CharaManager.charaDatas)
         {
             GameObject panelObject = Instantiate(WeaponPanel, CanvasTransform);
             var        panelProp   = panelObject.GetComponent<CharaPanelProperty>();
 
             panelProp.CharaNameText.text =
-                "武器名\n" + datas.CharaName+
+                "キャラ名\n" + datas.CharaName+
                 "\n攻撃回数: " +datas.AtackCount +
                 "\n回避回数: " + datas.AvoidanceCount +
                 "\n威力: " + datas.Power +
@@ -38,7 +38,7 @@ public class CsvController : MonoBehaviour
 
             GameObject modelObject = Instantiate(modelPrefab, panelProp.ModelParentTrf);
 
-            CharaManager.weaponModels.Add(modelObject.transform);
+            CharaManager.charaModels.Add(modelObject.transform);
         }
     }
 
