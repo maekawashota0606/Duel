@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 649899640}
   - component: {fileID: 649899639}
   - component: {fileID: 649899638}
+  - component: {fileID: 649899642}
   m_Layer: 0
   m_Name: dummy
   m_TagString: Player
@@ -645,6 +646,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &649899642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649899636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad9d25808d521344b587c27eeb7b49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 8934990892549456777, guid: e4a9f0ac9eb8878418e110942bec5987, type: 3}
 --- !u!1 &681246432
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244030103}
-  - component: {fileID: 1244030102}
+  - component: {fileID: 1244030104}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -839,21 +853,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1244030102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244030101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa9c251b7b638a49883684e2b8812b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPrefab: {fileID: 8934990892549456777, guid: 93c3f7ef1729c20469ef0ee8f132e1e8, type: 3}
-  comaObject: {fileID: 1259926735}
-  speed: 100000
 --- !u!4 &1244030103
 Transform:
   m_ObjectHideFlags: 0
@@ -869,6 +868,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1244030104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244030101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa9c251b7b638a49883684e2b8812b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 8934990892549456777, guid: 93c3f7ef1729c20469ef0ee8f132e1e8, type: 3}
+  comaObject: {fileID: 1259926735}
+  speed: 100000
 --- !u!1 &1255158664
 GameObject:
   m_ObjectHideFlags: 0
