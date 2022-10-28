@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test_Koma : MonoBehaviour
+public class Test_dummy : MonoBehaviour
 {
     Rigidbody2D rigid2D;
     [SerializeField] private GameObject attackPrefab;
@@ -36,12 +36,14 @@ public class Test_Koma : MonoBehaviour
                 objPos.x += attackPrefab.transform.localScale.x / 2f * Mathf.Cos(attackRad * Mathf.Deg2Rad);
                 objPos.y += attackPrefab.transform.localScale.x / 2f * Mathf.Sin(attackRad * Mathf.Deg2Rad);
                 attackObj.transform.position = objPos;
+                //attackObj.transform.position = GetAttackObjPos();
             }
         }
 
         //äÆëSí‚é~
         if (this.rigid2D.velocity.magnitude < 2.0f && this.rigid2D.velocity.magnitude != 0)
         {
+            Debug.Log("é~Ç‹ÇÈ(dummy)");
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Test_Player.start = true;
             Test_Player.Action = false;
@@ -59,19 +61,22 @@ public class Test_Koma : MonoBehaviour
     {
         if (other.gameObject.CompareTag("wall"))
         {
+            Debug.Log("ï«Ç…ìñÇΩÇ¡ÇΩ(dummy)");
             this.rigid2D.velocity *= 0.95f;
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("ÉvÉåÉCÉÑÅ[Ç…ìñÇΩÇ¡ÇΩ(dummy)");
             this.rigid2D.velocity *= 0.9f;
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Attack") && other.gameObject.name == "Attck_Test_P2(Clone)")
+        if (other.gameObject.CompareTag("Attack") && other.gameObject.name == "Attck_Test_P1(Clone)")
         {
+            Debug.Log("çUåÇÇ™ìñÇΩÇ¡ÇΩ(dummy)");
             this.rigid2D.velocity *= 0.8f;
         }
     }
