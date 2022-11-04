@@ -7,23 +7,36 @@ public class CsvController : MonoBehaviour
     public Transform CanvasTransform = null;
 
     [SerializeField]
-    public GameObject WeaponPanel = null;
+    public GameObject WeaponPanel1 = null;
+
+    [SerializeField] 
+    public GameObject WeaponPanel2 = null;
 
     public void Start()
-    {
+    { 
         foreach (CharaDatas datas in CharaManager.charaDatas)
         {
-            GameObject panelObject = Instantiate(WeaponPanel, CanvasTransform);
-            var        panelProp   = panelObject.GetComponent<CharaPanelProperty>();
+            GameObject panelObject1 = Instantiate(WeaponPanel1, CanvasTransform);
+            GameObject panelObject2 = Instantiate(WeaponPanel2, CanvasTransform);
+            var panelProp1 = panelObject1.GetComponent<CharaPanelProperty>();
+            var panelProp2 = panelObject2.GetComponent<CharaPanelProperty>();
 
-            panelProp.CharaNameText.text =
+            panelProp1.CharaNameText.text =
                 "キャラ名\n" + datas.CharaName+
                 "\n攻撃回数: " +datas.AtackCount +
                 "\n回避回数: " + datas.AvoidanceCount +
                 "\n威力: " + datas.Power +
                 "\n能力:" + datas.Charainfo;
-
-            panelProp.CharaInfoText.text =
+            panelProp1.CharaInfoText.text =
+                "説明\n" + datas.Charainfo;
+            
+            panelProp2.CharaNameText.text =
+                "キャラ名\n" + datas.CharaName+
+                "\n攻撃回数: " +datas.AtackCount +
+                "\n回避回数: " + datas.AvoidanceCount +
+                "\n威力: " + datas.Power +
+                "\n能力:" + datas.Charainfo;
+            panelProp2.CharaInfoText.text =
                 "説明\n" + datas.Charainfo;
 
             // モデル生成
@@ -36,9 +49,11 @@ public class CsvController : MonoBehaviour
                 continue;
             }
 
-            GameObject modelObject = Instantiate(modelPrefab, panelProp.ModelParentTrf);
+            GameObject modelObject1 = Instantiate(modelPrefab, panelProp1.ModelParentTrf);
+            GameObject modelObject2 = Instantiate(modelPrefab, panelProp2.ModelParentTrf);
 
-            CharaManager.charaModels.Add(modelObject.transform);
+            CharaManager.charaModels.Add(modelObject1.transform);
+            CharaManager.charaModels.Add(modelObject2.transform);
         }
     }
 
