@@ -5,10 +5,14 @@ using UnityEngine;
 public class Test_Koma1 : MonoBehaviour
 {
     Rigidbody2D rigid2D;
+    //攻撃オブジェクトのプレハブ
     [SerializeField] private GameObject attackPrefab;
     public static GameObject attackObj = null;
+    //攻撃時の角度
     public static float attackRad = 0f;
+    //攻撃出来る時間
     private float attackTime = 0.5f;
+    //攻撃を始めた時間
     public static float attackStartTime = 0f;
 
     // Start is called before the first frame update
@@ -23,6 +27,7 @@ public class Test_Koma1 : MonoBehaviour
         // 攻撃中 移動
         if (attackObj is not null)
         {
+            //攻撃出来る時間を上回ったら
             if (Test_Player1.time - attackStartTime > attackTime)
             {
                 // 攻撃時間が経過したら、攻撃オブジェクトを破壊
@@ -43,9 +48,10 @@ public class Test_Koma1 : MonoBehaviour
         if (this.rigid2D.velocity.magnitude < 2.0f && this.rigid2D.velocity.magnitude != 0)
         {
             Debug.Log("完全停止(P1)");
-            Test_Player1.Ready_P1 = true;
+            Test_Player1.Finish_P1 = true;
 
-            if (Test_Player2.Ready_P2)
+            //P2が完全停止したら中の処理を行う
+            if (Test_Player2.Finish_P2)
             {
                 this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 Test_Player1.start = true;

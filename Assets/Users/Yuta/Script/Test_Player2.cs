@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//コントローラー操作
 public class Test_Player2 : MonoBehaviour
 {
-    //コントローラー操作
-
+    //攻撃オブジェクトのプレハブ
+    [SerializeField] private GameObject attackPrefab;
+    //コマオブジェクトのプレハブ
+    [SerializeField] private GameObject comaObject;
     Rigidbody2D rigid2D;
     Vector2 startPos;
-    [SerializeField] private GameObject attackPrefab;
-    [SerializeField] private GameObject comaObject;
 
-    private float speed;
-    public static float start_time = 0f;
-    public static float time = 0f;
-    private float Action_time = 1f;
+    private float speed;　                 //コマのスピード
+    public static float start_time = 0f;   //スタートするまでの時間
+    public static float time = 0f;         //攻撃専用のタイマー
+    private float Action_time = 1f;        //攻撃・回避が出来るまでの時間
 
-    public static bool start = true;
-    public static bool Action = false;
-    public static bool Avoidance = false;
-    public static bool Ready_P2 = false;
+    public static bool start = true;       //スタート出来るかのフラグ
+    public static bool Action = false;     //攻撃出来るかのフラグ
+    public static bool Avoidance = false;  //回避出来るかのフラグ
+    public static bool Finish_P2 = false;  //完全停止したかのフラグ
+    //スタートの準備が出来たかのフラグ
     public static bool Start_Time_P2 = false;
 
     private float h;
@@ -29,11 +31,12 @@ public class Test_Player2 : MonoBehaviour
     void Start()
     {
         this.rigid2D = comaObject.GetComponent<Rigidbody2D>();
+        
+        //初期化
         start = true;
         Action = false;
         Avoidance = false;
-        Ready_P2 = false;
-
+        Finish_P2 = false;
         start_time = 0f;
         time = 0f;
     }
@@ -41,26 +44,34 @@ public class Test_Player2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ジョイスティックの左右
         h = Input.GetAxis("Horizontal_Test");
+        //ジョイスティックの上下
         v = Input.GetAxis("Vertical_Test");
 
         if (start)
         {
-            this.startPos = new Vector2(0, 0);
-
+            //P1とP2のStart_Timeフラグがtrueになったら中の処理をする
             if (Start_Time_P2 && Test_Player1.Start_Time_P1)
             {
                 Debug.Log("レディー");
                 start_time += Time.deltaTime;
             }
 
+            //hかvに値が入ってたら
             if (h != 0 || v != 0)
             {
+                //Start_Time_P2をtrueにする
                 Start_Time_P2 = true;
             }
 
+            //初期ポジション
+            this.startPos = new Vector2(0, 0);
+
+            //３秒たったら
             if (start_time >= 3f)
             {
+                //hかvに値が入ってたら
                 if (h != 0 || v != 0)
                 {
                     //スティックのポジションを代入
@@ -77,16 +88,17 @@ public class Test_Player2 : MonoBehaviour
         else
         {
             time += Time.deltaTime;
-            Ready_P2 = false;
+            Finish_P2 = false;
             Start_Time_P2 = false;
         }
 
         //攻撃＆回避
         if (Action_time <= time)
         {
+            //初期ポジション
             this.startPos = new Vector2(0, 0);
 
-            //攻撃
+            //攻撃           Ps4の○ボタン↓
             if (Input.GetButtonDown("Attack_Test") && Action)
             {
                 //マウスのドラッグ終了ポジションを代入
@@ -106,7 +118,7 @@ public class Test_Player2 : MonoBehaviour
                 Test_Koma2.attackStartTime = time;
                 Action = false;
             }
-            //回避
+            //回避             Ps4の×ボタン↓
             if (Input.GetButtonDown("Avoidance_Test") && Avoidance)
             {
                 //マウスのドラッグ終了ポジションを代入
@@ -125,21 +137,25 @@ public class Test_Player2 : MonoBehaviour
         //(離した座標 - 押した座標)に-１を掛けている
         Vector2 startDirection = -1 * (endPos - startPos).normalized;
 
-        //vとhを２乗とルートで計算
+        //vとhを２乗とルートで計算（スティックの傾きを計算）
         float d = Mathf.Sqrt(Mathf.Pow(h, 2) + Mathf.Pow(v, 2));
 
+        //0～0.25だったら
         if (d >= 0f && d <= 0.25f)
         {
             speed = 25000f;
         }
+        //0.25～0.5だったら
         if (d >= 0.25f && d <= 0.5f)
         {
             speed = 50000f;
         }
+        //0.5～0.75だったら
         if (d >= 0.5f && d <= 0.75f)
         {
             speed = 75000f;
         }
+        //0.75～1だったら
         if (d >= 0.75f && d <= 1f)
         {
             speed = 100000f;

@@ -2,36 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//マウス操作
 public class Test_Player1 : MonoBehaviour
 {
-    //マウス操作
-
+    //攻撃オブジェクトのプレハブ
+    [SerializeField] private GameObject attackPrefab;
+    //コマオブジェクトのプレハブ
+    [SerializeField] private GameObject comaObject;
     Rigidbody2D rigid2D;
     Vector2 startPos;
-    [SerializeField] private GameObject attackPrefab;
-    [SerializeField] private GameObject comaObject;
 
-    public float speed;
-    public static float start_time = 0f;
-    public static float time = 0f;
-    private float Action_time = 1f;
+    public float speed;　                 //コマのスピード
+    public static float start_time = 0f;　//スタートするまでの時間
+    public static float time = 0f;        //攻撃専用のタイマー
+    private float Action_time = 1f;       //攻撃・回避が出来るまでの時間
 
-    public static bool start = true;
-    public static bool Action = false;
-    public static bool Avoidance = false;
-    private bool mouseDrag = false;
-    public static bool Ready_P1 = false;
+    public static bool start = true;　　　//スタート出来るかのフラグ
+    public static bool Action = false;    //攻撃出来るかのフラグ
+    public static bool Avoidance = false; //回避出来るかのフラグ
+    private bool mouseDrag = false;       //マウスがドラック中かのフラグ
+    public static bool Finish_P1 = false;  //完全停止したかのフラグ
+    //スタートの準備が出来たかのフラグ
     public static bool Start_Time_P1 = false;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rigid2D = comaObject.GetComponent<Rigidbody2D>();
+
+        //初期化
         start = true;
         Action = false;
         Avoidance = false;
-        Ready_P1 = false;
-
+        Finish_P1 = false;
         start_time = 0f;
         time = 0f;
     }
@@ -53,8 +56,10 @@ public class Test_Player1 : MonoBehaviour
                 //マウスを押したポジションを代入
                 this.startPos = Input.mousePosition;
 
+                //Start_Time_P1をtrueにする
                 Start_Time_P1 = true;
             }
+            //３秒たったら
             else if (start_time >= 3f)
             {
                 //マウスを離したポジションを代入
@@ -70,7 +75,7 @@ public class Test_Player1 : MonoBehaviour
         else
         {
             time += Time.deltaTime;
-            Ready_P1 = false;
+            Finish_P1 = false;
             Start_Time_P1 = false;
         }
 
