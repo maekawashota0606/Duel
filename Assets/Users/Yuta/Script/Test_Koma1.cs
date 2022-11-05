@@ -62,6 +62,13 @@ public class Test_Koma1 : MonoBehaviour
                 Test_Player1.start_time = 0f;
             }
         }
+
+        if (Attack.Offset_P1)
+        {
+            Debug.Log("ŒÄ‚Î‚ê‚½");
+            this.rigid2D.velocity *= 0.9f;
+            Attack.Offset_P1 = false;
+        }
     }
 
     //ŽžŠÔŒo‰ß‚ÅŒ¸‘¬

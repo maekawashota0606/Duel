@@ -44,6 +44,7 @@ public class Test_Player1 : MonoBehaviour
     {
         if (start)
         {
+            //P1とP2のStart_Timeフラグがtrueになったら中の処理をする
             if (Start_Time_P1 && Test_Player2.Start_Time_P2)
             {
                 Debug.Log("レディー");
