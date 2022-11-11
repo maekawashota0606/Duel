@@ -30,13 +30,13 @@ public class CsvController : MonoBehaviour
             panelProp1.CharaInfoText.text =
                 "説明\n" + datas.Charainfo;
             
-            panelProp2.CharaNameText.text =
+            panelProp2.CharaNameText2.text =
                 "キャラ名\n" + datas.CharaName+
                 "\n攻撃回数: " +datas.AtackCount +
                 "\n回避回数: " + datas.AvoidanceCount +
                 "\n威力: " + datas.Power +
                 "\n能力:" + datas.Charainfo;
-            panelProp2.CharaInfoText.text =
+            panelProp2.CharaInfoText2.text =
                 "説明\n" + datas.Charainfo;
 
             // モデル生成
@@ -50,7 +50,7 @@ public class CsvController : MonoBehaviour
             }
 
             GameObject modelObject1 = Instantiate(modelPrefab, panelProp1.ModelParentTrf);
-            GameObject modelObject2 = Instantiate(modelPrefab, panelProp2.ModelParentTrf);
+            GameObject modelObject2 = Instantiate(modelPrefab, panelProp2.ModelParentTrf2);
 
             CharaManager.charaModels.Add(modelObject1.transform);
             CharaManager.charaModels.Add(modelObject2.transform);
