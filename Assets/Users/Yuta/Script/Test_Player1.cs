@@ -13,7 +13,7 @@ public class Test_Player1 : MonoBehaviour
     Vector2 startPos;
 
     public float speed;　                 //コマのスピード
-    public static float start_time = 0f;　//スタートするまでの時間
+    public static float start_time_P1 = 0f;　//スタートするまでの時間
     public static float time = 0f;        //攻撃専用のタイマー
     private float Action_time = 1f;       //攻撃・回避が出来るまでの時間
 
@@ -23,7 +23,7 @@ public class Test_Player1 : MonoBehaviour
     private bool mouseDrag = false;       //マウスがドラック中かのフラグ
     public static bool Finish_P1 = false;  //完全停止したかのフラグ
     //スタートの準備が出来たかのフラグ
-    public static bool Start_Time_P1 = false;
+    public bool Start_Time_P1 = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class Test_Player1 : MonoBehaviour
         Action = false;
         Avoidance = false;
         Finish_P1 = false;
-        start_time = 0f;
+        start_time_P1 = 0f;
         time = 0f;
     }
 
@@ -44,11 +44,15 @@ public class Test_Player1 : MonoBehaviour
     {
         if (start)
         {
-            //P1とP2のStart_Timeフラグがtrueになったら中の処理をする
-            if (Start_Time_P1 && Test_Player2.Start_Time_P2)
+            Start_Time_P1 = true;
+
+            if (Start_Time_P1)
             {
-                Debug.Log("レディー");
-                start_time += Time.deltaTime;
+                if (Time.frameCount % 1000 == 0)
+                {
+                    start_time_P1 += 1f;
+                    Debug.Log(start_time_P1);
+                }
             }
 
             //マウスの動きと反対方向に発射される
@@ -56,12 +60,9 @@ public class Test_Player1 : MonoBehaviour
             {
                 //マウスを押したポジションを代入
                 this.startPos = Input.mousePosition;
-
-                //Start_Time_P1をtrueにする
-                Start_Time_P1 = true;
             }
             //３秒たったら
-            else if (start_time >= 3f)
+            else if (start_time_P1 >= 3f)
             {
                 //マウスを離したポジションを代入
                 Vector2 endPos = Input.mousePosition;

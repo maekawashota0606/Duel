@@ -50,8 +50,8 @@ public class Test_Koma2 : MonoBehaviour
             Debug.Log("Š®‘S’â~(P2)");
             Test_Player2.Finish_P2 = true;
 
-            //P1‚ªŠ®‘S’â~‚µ‚½‚ç’†‚Ìˆ—‚ğs‚¤
-            if (Test_Player1.Finish_P1)
+            //P1‚ÆP2‚ªŠ®‘S’â~‚µ‚½‚ç’†‚Ìˆ—‚ğs‚¤
+            if (Test_Player1.Finish_P1 && Test_Player2.Finish_P2)
             {
                 this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 Test_Player2.start = true;
@@ -59,7 +59,7 @@ public class Test_Koma2 : MonoBehaviour
                 Test_Player2.Avoidance = false;
 
                 Test_Player2.time = 0f;
-                Test_Player2.start_time = 0f;
+                Test_Player2.start_time_P2 = 0f;
             }
         }
 
@@ -94,10 +94,13 @@ public class Test_Koma2 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Attack") && other.gameObject.name == "Attck_Test_P1(Clone)")
+        if (!Attack.Offset_P2)
         {
-            Debug.Log("UŒ‚‚ª“–‚½‚Á‚½(dummy)");
-            this.rigid2D.velocity *= 0.8f;
+            if (other.gameObject.CompareTag("Attack") && other.gameObject.name == "Attck_Test_P1(Clone)")
+            {
+                Debug.Log("UŒ‚‚ª“–‚½‚Á‚½(dummy)");
+                this.rigid2D.velocity *= 0.8f;
+            }
         }
     }
 }

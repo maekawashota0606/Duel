@@ -13,7 +13,7 @@ public class Test_Player2 : MonoBehaviour
     Vector2 startPos;
 
     private float speed;　                 //コマのスピード
-    public static float start_time = 0f;   //スタートするまでの時間
+    public static float start_time_P2 = 0f;   //スタートするまでの時間
     public static float time = 0f;         //攻撃専用のタイマー
     private float Action_time = 1f;        //攻撃・回避が出来るまでの時間
 
@@ -37,7 +37,7 @@ public class Test_Player2 : MonoBehaviour
         Action = false;
         Avoidance = false;
         Finish_P2 = false;
-        start_time = 0f;
+        start_time_P2 = 0f;
         time = 0f;
     }
 
@@ -51,11 +51,15 @@ public class Test_Player2 : MonoBehaviour
 
         if (start)
         {
-            //P1とP2のStart_Timeフラグがtrueになったら中の処理をする
-            if (Start_Time_P2 && Test_Player1.Start_Time_P1)
+            Start_Time_P2 = true;
+
+            if (Start_Time_P2)
             {
-                Debug.Log("レディー");
-                start_time += Time.deltaTime;
+                if (Time.frameCount % 1000 == 0)
+                {
+                    start_time_P2 += 1f;
+                    Debug.Log(start_time_P2);
+                }
             }
 
             //hかvに値が入ってたら
@@ -69,7 +73,7 @@ public class Test_Player2 : MonoBehaviour
             this.startPos = new Vector2(0, 0);
 
             //３秒たったら
-            if (start_time >= 3f)
+            if (start_time_P2 >= 3f)
             {
                 //hかvに値が入ってたら
                 if (h != 0 || v != 0)
