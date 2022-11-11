@@ -20,10 +20,12 @@ public class Seniyobidasi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.N))
+        //if (Input.GetButtonDown("Attack_Test"))
         //{
         //    //SceneFadeManagerの中のフェードアウト開始関数を呼び出し
-        //    fadeManager.fadeOutStart(0, 0, 0, 0, "main");
+        //    fadeManager.fadeOutStart(0, 0, 0, 0, "SampleScene");
+        //    Destroy(butoon);
+        //    Destroy(karitext);
         //}
     }
     public void OnClick()
