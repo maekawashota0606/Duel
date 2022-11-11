@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 649899638}
   - component: {fileID: 649899642}
   m_Layer: 0
-  m_Name: dummy
+  m_Name: Koma2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 649899636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad9d25808d521344b587c27eeb7b49b, type: 3}
+  m_Script: {fileID: 11500000, guid: f9e768d5ae031724d86bf79efa9ce3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 8934990892549456777, guid: e4a9f0ac9eb8878418e110942bec5987, type: 3}
@@ -845,6 +845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244030103}
+  - component: {fileID: 1244030105}
   - component: {fileID: 1244030104}
   m_Layer: 0
   m_Name: Player
@@ -877,7 +878,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1244030101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa9c251b7b638a49883684e2b8812b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 55c53aa0b760ae044802f40f95b7cb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 8934990892549456777, guid: e4a9f0ac9eb8878418e110942bec5987, type: 3}
+  comaObject: {fileID: 649899636}
+--- !u!114 &1244030105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244030101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdadc6ca2ea553c42bffcf6a10b02a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 8934990892549456777, guid: 93c3f7ef1729c20469ef0ee8f132e1e8, type: 3}
@@ -981,7 +996,7 @@ GameObject:
   - component: {fileID: 1259926737}
   - component: {fileID: 1259926741}
   m_Layer: 0
-  m_Name: Koma
+  m_Name: Koma1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1100,7 +1115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259926735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cde11810822c074ab2cc1a1d0848fa8, type: 3}
+  m_Script: {fileID: 11500000, guid: 96c617191576e9d4c80f08bc6d511faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 8934990892549456777, guid: 93c3f7ef1729c20469ef0ee8f132e1e8, type: 3}

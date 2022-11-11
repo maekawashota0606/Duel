@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test_dummy : MonoBehaviour
+public class Test_Koma1 : MonoBehaviour
 {
     Rigidbody2D rigid2D;
+    //攻撃オブジェクトのプレハブ
     [SerializeField] private GameObject attackPrefab;
     public static GameObject attackObj = null;
+    //攻撃時の角度
     public static float attackRad = 0f;
+    //攻撃出来る時間
     private float attackTime = 0.5f;
+    //攻撃を始めた時間
     public static float attackStartTime = 0f;
 
     // Start is called before the first frame update
@@ -23,7 +27,8 @@ public class Test_dummy : MonoBehaviour
         // 攻撃中 移動
         if (attackObj is not null)
         {
-            if (Test_Player.time - attackStartTime > attackTime)
+            //攻撃出来る時間を上回ったら
+            if (Test_Player1.time - attackStartTime > attackTime)
             {
                 // 攻撃時間が経過したら、攻撃オブジェクトを破壊
                 Destroy(attackObj);
@@ -36,18 +41,33 @@ public class Test_dummy : MonoBehaviour
                 objPos.x += attackPrefab.transform.localScale.x / 2f * Mathf.Cos(attackRad * Mathf.Deg2Rad);
                 objPos.y += attackPrefab.transform.localScale.x / 2f * Mathf.Sin(attackRad * Mathf.Deg2Rad);
                 attackObj.transform.position = objPos;
-                //attackObj.transform.position = GetAttackObjPos();
             }
         }
 
         //完全停止
         if (this.rigid2D.velocity.magnitude < 2.0f && this.rigid2D.velocity.magnitude != 0)
         {
-            Debug.Log("止まる(dummy)");
-            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            Test_Player.start = true;
-            Test_Player.Action = false;
-            Test_Player.Avoidance = false;
+            Debug.Log("完全停止(P1)");
+            Test_Player1.Finish_P1 = true;
+
+            //P1とP2が完全停止したら中の処理を行う
+            if (Test_Player1.Finish_P1 && Test_Player2.Finish_P2)
+            {
+                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                Test_Player1.start = true;
+                Test_Player1.Action = false;
+                Test_Player1.Avoidance = false;
+
+                Test_Player1.time = 0f;
+                Test_Player1.start_time_P1 = 0f;
+            }
+        }
+
+        if (Attack.Offset_P1)
+        {
+            Debug.Log("呼ばれた");
+            this.rigid2D.velocity *= 0.9f;
+            Attack.Offset_P1 = false;
         }
     }
 
@@ -61,23 +81,26 @@ public class Test_dummy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("wall"))
         {
-            Debug.Log("壁に当たった(dummy)");
+            Debug.Log("壁に当たった(Koma)");
             this.rigid2D.velocity *= 0.95f;
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("プレイヤーに当たった(dummy)");
+            Debug.Log("プレイヤーに当たった(Koma)");
             this.rigid2D.velocity *= 0.9f;
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Attack") && other.gameObject.name == "Attck_Test_P1(Clone)")
+        if (!Attack.Offset_P1)
         {
-            Debug.Log("攻撃が当たった(dummy)");
-            this.rigid2D.velocity *= 0.8f;
+            if (other.gameObject.CompareTag("Attack") && other.gameObject.name == "Attck_Test_P2(Clone)")
+            {
+                Debug.Log("攻撃が当たった(Koma)");
+                this.rigid2D.velocity *= 0.8f;
+            }
         }
     }
 }

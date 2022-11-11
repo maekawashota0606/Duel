@@ -2,29 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test_Player : MonoBehaviour
+//マウス操作
+public class Test_Player1 : MonoBehaviour
 {
+    //攻撃オブジェクトのプレハブ
+    [SerializeField] private GameObject attackPrefab;
+    //コマオブジェクトのプレハブ
+    [SerializeField] private GameObject comaObject;
     Rigidbody2D rigid2D;
     Vector2 startPos;
-    [SerializeField] private GameObject attackPrefab;
-    [SerializeField] private GameObject comaObject;
 
-    public float speed;
-    public static float time = 0f;
-    private float Action_time = 1f;
+    public float speed;　                 //コマのスピード
+    public static float start_time_P1 = 0f;　//スタートするまでの時間
+    public static float time = 0f;        //攻撃専用のタイマー
+    private float Action_time = 1f;       //攻撃・回避が出来るまでの時間
 
-    public static bool start = true;
-    public static bool Action = false;
-    public static bool Avoidance = false;
-    private bool mouseDrag = false;
+    public static bool start = true;　　　//スタート出来るかのフラグ
+    public static bool Action = false;    //攻撃出来るかのフラグ
+    public static bool Avoidance = false; //回避出来るかのフラグ
+    private bool mouseDrag = false;       //マウスがドラック中かのフラグ
+    public static bool Finish_P1 = false;  //完全停止したかのフラグ
+    //スタートの準備が出来たかのフラグ
+    public bool Start_Time_P1 = false;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rigid2D = comaObject.GetComponent<Rigidbody2D>();
+
+        //初期化
         start = true;
         Action = false;
         Avoidance = false;
+        Finish_P1 = false;
+        start_time_P1 = 0f;
+        time = 0f;
     }
 
     // Update is called once per frame
@@ -32,20 +44,30 @@ public class Test_Player : MonoBehaviour
     {
         if (start)
         {
+            Start_Time_P1 = true;
+
+            if (Start_Time_P1)
+            {
+                if (Time.frameCount % 1000 == 0)
+                {
+                    start_time_P1 += 1f;
+                    Debug.Log(start_time_P1);
+                }
+            }
+
             //マウスの動きと反対方向に発射される
-            //Input.GetMouseButtonDown(0)
             if (InputProvider.Instance.GetFire1Down())
             {
                 //マウスを押したポジションを代入
                 this.startPos = Input.mousePosition;
             }
-            //Input.GetMouseButtonUp(0)
-            else if (InputProvider.Instance.GetFire1Up())
+            //３秒たったら
+            else if (start_time_P1 >= 3f)
             {
                 //マウスを離したポジションを代入
                 Vector2 endPos = Input.mousePosition;
                 //マウスの動きと反対方向に移動
-                Test_KomaMove(endPos);
+                KomaMove(endPos);
 
                 start = false;
                 Action = true;
@@ -55,20 +77,22 @@ public class Test_Player : MonoBehaviour
         else
         {
             time += Time.deltaTime;
+            Finish_P1 = false;
+            Start_Time_P1 = false;
         }
 
         //攻撃＆回避
         if (Action_time <= time)
         {
             //マウスドラッグ開始
-            if (Input.GetMouseButtonDown(0))
+            if (InputProvider.Instance.GetFire1Down())
             {
                 //マウスのドラッグ開始ポジションを代入
                 this.startPos = Input.mousePosition;
                 mouseDrag = true;
             }
             //マウスドラッグ終了
-            else if (Input.GetMouseButtonUp(0))
+            else if (InputProvider.Instance.GetFire1Up())
             {
                 mouseDrag = false;
             }
@@ -84,27 +108,28 @@ public class Test_Player : MonoBehaviour
                     Vector2 endPos = Input.mousePosition;
 
                     //ドラッグ開始ポジションと終了ポジション間の角度を計算
-                    Test_Koma.attackRad = Mathf.Repeat(Mathf.Atan2(startPos.y - endPos.y, startPos.x - endPos.x) * Mathf.Rad2Deg, 360);
+                    Test_Koma1.attackRad = Mathf.Repeat(Mathf.Atan2(startPos.y - endPos.y, startPos.x - endPos.x) * Mathf.Rad2Deg, 360);
 
                     //攻撃オブジェクトの生成位置を計算
                     Vector2 objPos = comaObject.transform.position;
-                    objPos.x += attackPrefab.transform.localScale.x / 2f * Mathf.Cos(Test_Koma.attackRad * Mathf.Deg2Rad);
-                    objPos.y += attackPrefab.transform.localScale.x / 2f * Mathf.Sin(Test_Koma.attackRad * Mathf.Deg2Rad);
+                    objPos.x += attackPrefab.transform.localScale.x / 2f * Mathf.Cos(Test_Koma1.attackRad * Mathf.Deg2Rad);
+                    objPos.y += attackPrefab.transform.localScale.x / 2f * Mathf.Sin(Test_Koma1.attackRad * Mathf.Deg2Rad);
 
                     //攻撃プレハブを元に、オブジェクトを生成、
-                    Test_Koma.attackObj = Instantiate(attackPrefab, objPos, Quaternion.Euler(0.0f, 0.0f, Test_Koma.attackRad));
+                    Test_Koma1.attackObj = Instantiate(attackPrefab, objPos, Quaternion.Euler(0.0f, 0.0f, Test_Koma1.attackRad));
 
-                    Test_Koma.attackStartTime = time;
+                    Test_Koma1.attackStartTime = time;
                     Action = false;
                 }
                 //回避
                 else if (Input.GetKeyDown(KeyCode.Space) && Avoidance)
                 {
+                    Debug.Log("回避");
                     //マウスのドラッグ終了ポジションを代入
                     Vector2 endPos = Input.mousePosition;
 
                     //(ドラッグ終了ポジション - ドラッグ開始ポジション)に-１を掛けている
-                    Test_KomaMove(endPos);
+                    KomaMove(endPos);
 
                     Avoidance = false;
                 }
@@ -113,7 +138,7 @@ public class Test_Player : MonoBehaviour
     }
 
     //これは、値を返さない変数
-    void Test_KomaMove(Vector2 endPos)
+    void KomaMove(Vector2 endPos)
     {
         //(離した座標 - 押した座標)に-１を掛けている
         Vector2 startDirection = -1 * (endPos - startPos).normalized;
