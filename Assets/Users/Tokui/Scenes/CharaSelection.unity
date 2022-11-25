@@ -2126,8 +2126,8 @@ MonoBehaviour:
   vPageNum: 0
   smoothness: 10
   scrollWeight: 0.1
-  hContent: 1
-  hPageMax: 2
+  hContent: 0
+  hPageMax: 1
 --- !u!114 &1505209047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2192,7 +2192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1505636951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac437c05c6249e4a9b29760055c9ed1, type: 3}
+  m_Script: {fileID: 11500000, guid: e885f86996a32a24ca1aa05066e82531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1505636953
@@ -2400,8 +2400,8 @@ MonoBehaviour:
   vPageNum: 0
   smoothness: 10
   scrollWeight: 0.1
-  hContent: 1
-  hPageMax: 2
+  hContent: 0
+  hPageMax: 1
 --- !u!114 &1770015541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2859,10 +2859,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7312c454d9a9e04c8b5481fb3069c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charaNameText: {fileID: 894592209}
-  charaNameText2: {fileID: 846475640}
-  charaInfoText: {fileID: 818532112}
-  charaInfoText2: {fileID: 1276605230}
+  charaNameText: {fileID: 0}
+  charaNameText2: {fileID: 0}
+  charaInfoText1_1: {fileID: 894592209}
+  charaInfoText1_2: {fileID: 846475640}
+  charaInfoText2_1: {fileID: 1992586085}
+  charaInfoText2_2: {fileID: 13021688}
+  charaInfoText3_1: {fileID: 649127342}
+  charaInfoText3_2: {fileID: 2122427947}
+  charaInfoText4_1: {fileID: 818532112}
+  charaInfoText4_2: {fileID: 1276605230}
   modelParentTrf: {fileID: 782792855}
   modelParentTrf2: {fileID: 684997748}
 --- !u!1 &2066046341

@@ -22,22 +22,26 @@ public class CsvController : MonoBehaviour
             var panelProp2 = panelObject2.GetComponent<CharaPanelProperty>();
 
             panelProp1.CharaNameText.text =
-                "キャラ名\n" + datas.CharaName+
-                "\n攻撃回数: " +datas.AtackCount +
-                "\n回避回数: " + datas.AvoidanceCount +
-                "\n威力: " + datas.Power +
-                "\n能力:" + datas.Charainfo;
+                "キャラ名:" + datas.CharaName;
+            panelProp1.AtackCountText.text =
+                "攻撃回数: " + datas.AtackCount;
+            panelProp1.AvoidanceCountText.text =
+                "回避回数: " + datas.AvoidanceCount;
+            panelProp1.PowerText.text =
+                "威力: " + datas.Power;
             panelProp1.CharaInfoText.text =
-                "説明\n" + datas.Charainfo;
+                "能力" + datas.Charainfo;
             
-            panelProp2.CharaNameText2.text =
-                "キャラ名\n" + datas.CharaName+
-                "\n攻撃回数: " +datas.AtackCount +
-                "\n回避回数: " + datas.AvoidanceCount +
-                "\n威力: " + datas.Power +
-                "\n能力:" + datas.Charainfo;
-            panelProp2.CharaInfoText2.text =
-                "説明\n" + datas.Charainfo;
+            panelProp2.CharaNameText.text =
+                "キャラ名:" + datas.CharaName;
+            panelProp2.AtackCountText.text =
+                "攻撃回数: " + datas.AtackCount;
+            panelProp2.AvoidanceCountText.text =
+                "回避回数: " + datas.AvoidanceCount;
+            panelProp2.PowerText.text =
+                "威力: " + datas.Power;
+            panelProp2.CharaInfoText.text =
+                "能力" + datas.Charainfo;
 
             // モデル生成
             var modelPrefab = Resources.Load<GameObject>(datas.PrefabsName);
